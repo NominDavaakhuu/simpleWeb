@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<section>
+
+    <div class="text-dark text-center">
+        <div>
+            <h5><br>PRODUCTS</h5>
+        </div>
+    </div>
+
+    <div class="categories">
+        <div class="small-container">
+            <div class="row">
+                <!-- Product Card -->
+                {% for product in products%}
+                <div class="card">
+                    <img class="card-img-top" src="{{url_for('static', filename = (product.image))}}" alt="Card image">
+                    <div class="card-body">
+                        <h4 class="card-title">{{product.name}}</h4>
+                        <p class="card-text">{{product.description}}</p>
+                        <p class="card-text">{{product.price}} $</p>
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <form action="{{ url_for('main.order') }}">
+                                <input type="hidden" id="product_id" name="product_id" value="{{ product.id }}">
+                                <input class="btn-wish" type="submit" value="Add to Basket">
+                            </form>
+                            <form action="{{ url_for('main.product_detail', product_id=product.id) }}" method="GET">
+                                <input type="submit" class="btn-wish" value="View Details">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+</section>
+{% endblock %}

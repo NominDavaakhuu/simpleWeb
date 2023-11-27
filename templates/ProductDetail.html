@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+
+{% block main %}
+
+<!----------------------------Single product feature------------------------------>
+<br>
+<br>
+<div class="row">
+    <div class="card-2">
+        <img class="card-img" src="{{url_for('static', filename = (product.image))}}" alt="Card image">
+    </div>
+    <div class="card-text">
+        <h5 style="color: #8355ee;">Product Details <i class="fa-solid fa-circle-info"></i></h5>
+        <h4 class="card-title">{{product.name}}</h4>
+        <p class="card-text">{{product.description}}</p>
+        <h5 class="card-text">{{product.price}} $ AUD</h5>
+        <p>You can customize it with your personal logo, photo, message or even text.
+        </p>
+        <select>
+            <option>Available sizes</option>
+            <option>XL</option>
+            <option>L</option>
+            <option>M</option>
+            <option>S</option>
+        </select>
+        <form action="{{ url_for('main.order') }}">
+            <input type="hidden" id="product_id" name="product_id" value="{{ product.id }}">
+            <input class="btn-wish" type="submit" value="Add to Basket">
+        </form>
+    </div>
+</div>
+{% endblock %}

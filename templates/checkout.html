@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% import 'bootstrap4/form.html' as wtf %}
+
+{% block main %}
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="text-dark text-center">
+                    <div>
+                        <h5><br>CHECK OUT</h5>
+                        <p>
+                            Thank you for choosing us. Please provide your details so that we can <br>
+                            contact you to finalise details and take payment. Thank you!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                {{ wtf.render_form(form) }}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

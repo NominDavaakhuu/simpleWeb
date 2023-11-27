@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<!--contents of user basket -->
+<section>
+    <div class="container">
+        <div class="row co-12 d-flex mt-2 mb-2">
+            <div class="text-dark text-center">
+                <h5><br>SHOPPING BASKET</h5>
+            </div>
+        </div>
+        <!-- PRODUCT ROW-->
+        <div class="small-container cart-page">
+            <table>
+                <tr>
+                    <th>Product</th>
+                    <th></th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                </tr>
+                {% for product in order.products %}
+                <tr>
+                    <td>
+                        <img src="{{ url_for('static', filename=(product.image)) }}">
+                        <p>{{product.name}}</p>
+                    </td>
+                    <td>
+                        <form method="POST" action="{{ url_for('main.deleteorderitem')}}">
+                            <input type="hidden" id="id" name="id" value="{{ product.id }}">
+                            <input type="submit" value="X" class="btn-wish">
+                        </form>
+                    </td>
+                    <td><input type="number" value="1"></td>
+                    <td>
+                        <p>{{ "$%.2f"|format(product.price) }}</p>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+            <div class="total-price">
+                <table>
+                    <tr>
+                        <!--  calculate TOTAL PRICE -->
+                        <td>Subtotal</td>
+                        <td>{{ "$%.2f"|format(total_price) }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!--  SHOW OPTIONS -->
+    <section>
+        <div class="row">
+            <a href="{{ url_for('main.index', _anchor='categories_anchor') }}" class="btn-wish">CATEGORIES</a>
+            <a href="{{ url_for('main.checkout') }}" class="btn-wish" style="font-size:larger;">CHECK OUT <i
+                    class="fa-solid fa-basket-shopping fa-bounce"></i></a>
+            <a href="{{ url_for('main.deleteorder') }}" class="btn-wish">EMPTY BASKET</a>
+        </div>
+    </section>
+    <br>
+    {% endblock %}
